@@ -37,8 +37,11 @@ install(DIRECTORY launch/
 	DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
-
 OPTION(USE_SETCAP "Set permissions to access ethernet interface without sudo" ON)
+IF($ENV{USE_SETCAP})
+    SET(USE_SETCAP ON)
+    message("USECAP was set to ON")
+endif($ENV{USE_SETCAP})
 
 SET(SUDO_COMMAND gksudo)
 IF($ENV{USE_NORMAL_SUDO})
